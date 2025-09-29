@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header.js';
 import apiService from '../services/api.js';
 import type { Category } from '../types/index.js';
@@ -6,12 +7,13 @@ import type { Category } from '../types/index.js';
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await apiService.getCategories();
-        setCategories(response.data || []);
+        setCategories(response.data.data || []);
       } catch (error) {
         console.error('Failed to fetch categories', error);
       } finally {
@@ -30,7 +32,7 @@ export default function Home() {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-5xl font-bold mb-4">Welcome to Shop Verse</h1>
             <p className="text-xl mb-8">Discover amazing products from various brands</p>
-            <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+            <button onClick={() => navigate('/products')} className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
               Start Shopping
             </button>
           </div>
