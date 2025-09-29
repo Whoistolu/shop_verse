@@ -70,17 +70,33 @@ export default function Signup() {
                 required
               />
             </div>
-            <div className="mb-4">
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Account Type</label>
+            <div className="flex items-center space-x-4">
               <label className="flex items-center">
                 <input
-                  type="checkbox"
-                  checked={isBrand}
-                  onChange={(e) => setIsBrand(e.target.checked)}
+                  type="radio"
+                  name="accountType"
+                  value="customer"
+                  checked={!isBrand}
+                  onChange={() => setIsBrand(false)}
                   className="mr-2"
                 />
-                Signup as Brand Owner
+                Customer
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="accountType"
+                  value="brand"
+                  checked={isBrand}
+                  onChange={() => setIsBrand(true)}
+                  className="mr-2"
+                />
+                Brand Owner
               </label>
             </div>
+          </div>
             {isBrand && (
               <>
                 <div className="mb-4">
