@@ -57,7 +57,7 @@ export default function Login() {
                 Login as Brand Owner
               </label>
             </div>
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+            <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
               Login
             </button>
           </form>
