@@ -120,7 +120,7 @@ export default function Signup() {
                 </div>
               </>
             )}
-            <button type="submit" className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">
+            <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
               Signup
             </button>
           </form>
