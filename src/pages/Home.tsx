@@ -24,25 +24,36 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      <div className="pt-20 container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          Welcome to Shop Verse
-        </h1>
-        <p className="text-lg text-center text-gray-600 mb-8">
-          Discover amazing products from various brands.
-        </p>
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Shop by Category</h2>
-        {loading ? (
-          <div className="text-center py-8">Loading categories...</div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {categories.map(category => (
-              <div key={category.id} className="bg-white p-4 rounded shadow hover:shadow-lg transition-shadow">
-                <h3 className="text-lg font-semibold text-center">{category.name}</h3>
-              </div>
-            ))}
+      <div className="pt-20">
+        {/* Hero Section */}
+        <div className="bg-gradient-to-r from-orange-400 to-orange-600 text-white py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-5xl font-bold mb-4">Welcome to Shop Verse</h1>
+            <p className="text-xl mb-8">Discover amazing products from various brands</p>
+            <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+              Start Shopping
+            </button>
           </div>
-        )}
+        </div>
+
+        {/* Categories Section */}
+        <div className="container mx-auto px-4 py-12">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Shop by Category</h2>
+          {loading ? (
+            <div className="text-center py-8">Loading categories...</div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              {categories.map(category => (
+                <div key={category.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer border border-gray-200">
+                  <div className="w-16 h-16 bg-orange-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-2xl text-orange-600">📦</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-center text-gray-800">{category.name}</h3>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
