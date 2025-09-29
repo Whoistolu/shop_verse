@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password, isBrand);
-      // Redirect or something
+      
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="pt-20 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
           <form onSubmit={handleSubmit}>
