@@ -26,7 +26,7 @@ export default function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement search
+    // I added a TODO: Implement search
     console.log('Search:', search);
   };
 
@@ -37,7 +37,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 bg-blue-600 text-white p-4 z-10">
+      <header className="fixed top-0 left-0 right-0 bg-orange-500 text-white p-4 z-10">
         <nav className="container mx-auto flex justify-between items-center">
           <div>
             <button
@@ -116,7 +116,7 @@ export default function Header() {
               Sign in as Brand Owner
             </label>
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
             Sign In
           </button>
         </form>
