@@ -42,19 +42,19 @@ class ApiService {
   }
 
   // Authentication methods
-  async brandSignup(email: string, password: string, firstName: string, lastName: string, brandName: string, brandDescription: string): Promise<AuthResponse> {
-    const response: AxiosResponse<ApiResponse<AuthResponse>> = await this.api.post('/auth/brand_signup', {
+  async brandSignup(email: string, password: string, firstName: string, lastName: string, brandName: string, brandDescription: string): Promise<any> {
+    const response = await this.api.post('/auth/brand_signup', {
       user: { email, password, first_name: firstName, last_name: lastName },
       brand: { name: brandName, description: brandDescription }
     });
-    return response.data.data;
+    return response.data;
   }
 
-  async customerSignup(email: string, password: string, firstName: string, lastName: string): Promise<AuthResponse> {
-    const response: AxiosResponse<ApiResponse<AuthResponse>> = await this.api.post('/auth/customer_signup', {
+  async customerSignup(email: string, password: string, firstName: string, lastName: string): Promise<any> {
+    const response = await this.api.post('/auth/customer_signup', {
       user: { email, password, first_name: firstName, last_name: lastName }
     });
-    return response.data.data;
+    return response.data;
   }
 
   async brandLogin(email: string, password: string): Promise<AuthResponse> {
@@ -72,10 +72,14 @@ class ApiService {
   }
 
   async verifyOtp(email: string, otp: string): Promise<AuthResponse> {
-    const response: AxiosResponse<ApiResponse<AuthResponse>> = await this.api.post('/auth/verify_otp', {
+    const response = await this.api.post('/auth/verify_otp', {
       email, otp
     });
-    return response.data.data;
+    const data = response.data;
+    return {
+      user: data.user,
+      token: data.token
+    };
   }
 
   // Product methods
