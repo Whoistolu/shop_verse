@@ -61,13 +61,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signup = async (email: string, password: string, firstName: string, lastName: string, isBrand: boolean, brandName?: string, brandDescription?: string) => {
-    let authResponse: AuthResponse;
     if (isBrand) {
-      authResponse = await apiService.brandSignup(email, password, firstName, lastName, brandName!, brandDescription!);
+      await apiService.brandSignup(email, password, firstName, lastName, brandName!, brandDescription!);
     } else {
-      authResponse = await apiService.customerSignup(email, password, firstName, lastName);
+      await apiService.customerSignup(email, password, firstName, lastName);
     }
-    saveAuthData(authResponse);
+    localStorage.setItem('pendingEmail', email);
   };
 
   const verifyOtp = async (email: string, otp: string) => {
