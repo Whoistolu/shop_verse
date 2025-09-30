@@ -66,6 +66,9 @@ export default function Header() {
             {user ? (
               <>
                 <span>Welcome, {user.email}</span>
+                {user.role === 'super_admin' && (
+                  <Link to="/admin" className="hover:underline">Admin</Link>
+                )}
                 <button onClick={handleLogout} className="hover:underline">Logout</button>
               </>
             ) : (
