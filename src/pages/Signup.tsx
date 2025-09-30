@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
 
 import Header from '../components/Header.js';
@@ -12,12 +13,13 @@ export default function Signup() {
   const [brandName, setBrandName] = useState('');
   const [brandDescription, setBrandDescription] = useState('');
   const { signup } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await signup(email, password, firstName, lastName, isBrand, brandName, brandDescription);
-      // Redirect or something
+      navigate('/otp-verification');
     } catch (error) {
       console.error('Signup failed', error);
     }
