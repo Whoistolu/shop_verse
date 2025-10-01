@@ -58,17 +58,45 @@ class ApiService {
   }
 
   async brandLogin(email: string, password: string): Promise<AuthResponse> {
-    const response: AxiosResponse<ApiResponse<AuthResponse>> = await this.api.post('/auth/brand_login', {
+    const response = await this.api.post('/auth/brand_login', {
       user: { email, password }
     });
-    return response.data.data;
+    const data = response.data;
+    return {
+      user: {
+        ...data.user,
+        role: data.user.role_id === 1 ? 'super_admin' : data.user.role_id === 2 ? 'brand_owner' : 'customer'
+      },
+      token: data.user.token
+    };
   }
 
   async customerLogin(email: string, password: string): Promise<AuthResponse> {
-    const response: AxiosResponse<ApiResponse<AuthResponse>> = await this.api.post('/auth/customer_login', {
+    const response = await this.api.post('/auth/customer_login', {
       user: { email, password }
     });
-    return response.data.data;
+    const data = response.data;
+    return {
+      user: {
+        ...data.user,
+        role: data.user.role_id === 1 ? 'super_admin' : data.user.role_id === 2 ? 'brand_owner' : 'customer'
+      },
+      token: data.user.token
+    };
+  }
+
+  async superAdminLogin(email: string, password: string): Promise<AuthResponse> {
+    const response = await this.api.post('/auth/super_admin_login', {
+      user: { email, password }
+    });
+    const data = response.data;
+    return {
+      user: {
+        ...data.user,
+        role: data.user.role_id === 1 ? 'super_admin' : data.user.role_id === 2 ? 'brand_owner' : 'customer'
+      },
+      token: data.user.token
+    };
   }
 
   async verifyOtp(email: string, otp: string): Promise<AuthResponse> {
