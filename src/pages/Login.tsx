@@ -6,14 +6,18 @@ import Header from '../components/Header.js';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isBrand, setIsBrand] = useState(false);
+  const [userType, setUserType] = useState<'customer' | 'brand_owner' | 'super_admin'>('customer');
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password, isBrand);
-      
+      await login(email, password, userType);
+      if (userType === 'super_admin') {
+        window.location.href = '/admin';
+      } else {
+        window.location.href = '/';
+      }
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -47,15 +51,39 @@ export default function Login() {
               />
             </div>
             <div className="mb-4">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isBrand}
-                  onChange={(e) => setIsBrand(e.target.checked)}
-                  className="mr-2"
-                />
-                Login as Brand Owner
-              </label>
+              <label className="block text-gray-700 mb-2">Login as:</label>
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    value="customer"
+                    checked={userType === 'customer'}
+                    onChange={(e) => setUserType(e.target.value as 'customer' | 'brand_owner' | 'super_admin')}
+                    className="mr-2"
+                  />
+                  Customer
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    value="brand_owner"
+                    checked={userType === 'brand_owner'}
+                    onChange={(e) => setUserType(e.target.value as 'customer' | 'brand_owner' | 'super_admin')}
+                    className="mr-2"
+                  />
+                  Brand Owner
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    value="super_admin"
+                    checked={userType === 'super_admin'}
+                    onChange={(e) => setUserType(e.target.value as 'customer' | 'brand_owner' | 'super_admin')}
+                    className="mr-2"
+                  />
+                  Super Admin
+                </label>
+              </div>
             </div>
             <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
               Login
