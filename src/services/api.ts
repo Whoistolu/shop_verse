@@ -93,7 +93,7 @@ class ApiService {
     return {
       user: {
         ...data.user,
-        role: data.user.role_id === 1 ? 'super_admin' : data.user.role_id === 2 ? 'brand_owner' : 'customer'
+        role: data.user.user_role_id === 1 ? 'super_admin' : data.user.user_role_id === 2 ? 'brand_owner' : 'customer'
       },
       token: data.user.token
     };
