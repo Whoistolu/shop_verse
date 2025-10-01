@@ -7,7 +7,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string, isBrand: boolean) => Promise<void>;
+  login: (email: string, password: string, userType: 'customer' | 'brand_owner' | 'super_admin') => Promise<void>;
   signup: (email: string, password: string, firstName: string, lastName: string, isBrand: boolean, brandName?: string, brandDescription?: string) => Promise<void>;
   logout: () => void;
   verifyOtp: (email: string, otp: string) => Promise<void>;
@@ -50,12 +50,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(authResponse.user);
   };
 
-  const login = async (email: string, password: string, isBrand: boolean) => {
-    let authResponse: AuthResponse;
-    if (isBrand) {
+  const login = async (email: string, password: string, userType: 'customer' | 'brand_owner' | 'super_admin') => {
+    let authResponse: AuthResponse | undefined;
+    if (userType === 'brand_owner') {
       authResponse = await apiService.brandLogin(email, password);
+    } else if (userType === 'super_admin') {
+      authResponse = await apiService.superAdminLogin(email, password);
     } else {
       authResponse = await apiService.customerLogin(email, password);
+    }
+    if (!authResponse || !authResponse.token) {
+      throw new Error('Invalid login response: missing token');
     }
     saveAuthData(authResponse);
   };
