@@ -4,11 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from './Modal.js';
 
 export default function Header() {
-  const { user, logout, login } = useAuth();
+  const { user, logout, login, signup } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState<'customer' | 'brand_owner' | 'super_admin'>('customer');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [brandName, setBrandName] = useState('');
+  const [brandDescription, setBrandDescription] = useState('');
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
@@ -30,6 +37,23 @@ export default function Header() {
     console.log('Search:', search);
   };
 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await signup(signupEmail, signupPassword, firstName, lastName, true, brandName, brandDescription);
+      setIsSignupModalOpen(false);
+      setSignupEmail('');
+      setSignupPassword('');
+      setFirstName('');
+      setLastName('');
+      setBrandName('');
+      setBrandDescription('');
+      navigate('/otp-verification');
+    } catch (error) {
+      console.error('Signup failed', error);
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -41,7 +65,7 @@ export default function Header() {
         <nav className="container flex items-center justify-between mx-auto">
           <div>
             <button
-              onClick={() => navigate('/signup')}
+              onClick={() => setIsSignupModalOpen(true)}
               className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
             >
               Sell on Shop Verse
@@ -140,6 +164,73 @@ export default function Header() {
         <p className="mt-4 text-center">
           Don't have an account? <Link to="/signup" className="text-blue-500 hover:underline" onClick={() => setIsLoginModalOpen(false)}>Sign up</Link>
         </p>
+      </Modal>
+      <Modal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)}>
+        <h2 className="mb-6 text-2xl font-bold text-center">Become a Brand Owner</h2>
+        <form onSubmit={handleSignup}>
+          <div className="mb-4">
+            <label className="block text-gray-700">Email</label>
+            <input
+              type="email"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Password</label>
+            <input
+              type="password"
+              value={signupPassword}
+              onChange={(e) => setSignupPassword(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">First Name</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Last Name</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Brand Name</label>
+            <input
+              type="text"
+              value={brandName}
+              onChange={(e) => setBrandName(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Brand Description</label>
+            <textarea
+              value={brandDescription}
+              onChange={(e) => setBrandDescription(e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <button type="submit" className="w-full py-2 text-white transition-colors bg-green-500 rounded hover:bg-green-600">
+            Sign Up as Brand Owner
+          </button>
+        </form>
       </Modal>
     </>
   );
