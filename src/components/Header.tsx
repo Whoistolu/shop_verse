@@ -37,12 +37,12 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 bg-orange-500 text-white p-4 z-10">
-        <nav className="container mx-auto flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-10 p-4 text-white bg-orange-500">
+        <nav className="container flex items-center justify-between mx-auto">
           <div>
             <button
               onClick={() => navigate('/signup')}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
             >
               Sell on Shop Verse
             </button>
@@ -53,11 +53,11 @@ export default function Header() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search products..."
-              className="px-3 py-2 rounded text-black"
+              className="px-3 py-2 text-black rounded"
             />
             <button
               onClick={handleSearch}
-              className="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300"
+              className="px-4 py-2 text-black bg-gray-200 rounded hover:bg-gray-300"
             >
               Search
             </button>
@@ -86,7 +86,7 @@ export default function Header() {
         </nav>
       </header>
       <Modal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center">Sign In</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
@@ -109,7 +109,7 @@ export default function Header() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Sign in as:</label>
+            <label className="block mb-2 text-gray-700">Sign in as:</label>
             <div className="space-y-2">
               <label className="flex items-center">
                 <input
@@ -131,19 +131,9 @@ export default function Header() {
                 />
                 Brand Owner
               </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  value="super_admin"
-                  checked={userType === 'super_admin'}
-                  onChange={(e) => setUserType(e.target.value as 'customer' | 'brand_owner' | 'super_admin')}
-                  className="mr-2"
-                />
-                Super Admin
-              </label>
             </div>
           </div>
-          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
+          <button type="submit" className="w-full py-2 text-white transition-colors bg-orange-500 rounded hover:bg-orange-600">
             Sign In
           </button>
         </form>
