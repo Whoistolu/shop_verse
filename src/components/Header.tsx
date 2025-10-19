@@ -139,6 +139,7 @@ export default function Header() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your email"
               required
             />
           </div>
@@ -149,6 +150,7 @@ export default function Header() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your password"
               required
             />
           </div>
@@ -195,6 +197,7 @@ export default function Header() {
               value={signupEmail}
               onChange={(e) => setSignupEmail(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your email"
               required
             />
           </div>
@@ -205,6 +208,7 @@ export default function Header() {
               value={signupPassword}
               onChange={(e) => setSignupPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your password"
               required
             />
           </div>
@@ -215,6 +219,7 @@ export default function Header() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your first name"
               required
             />
           </div>
@@ -225,6 +230,7 @@ export default function Header() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your last name"
               required
             />
           </div>
@@ -235,6 +241,7 @@ export default function Header() {
               value={brandName}
               onChange={(e) => setBrandName(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your brand name"
               required
             />
           </div>
@@ -244,6 +251,7 @@ export default function Header() {
               value={brandDescription}
               onChange={(e) => setBrandDescription(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Describe your brand"
               required
             />
           </div>
@@ -262,6 +270,7 @@ export default function Header() {
               value={customerSignupEmail}
               onChange={(e) => setCustomerSignupEmail(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your email"
               required
             />
           </div>
@@ -272,6 +281,7 @@ export default function Header() {
               value={customerSignupPassword}
               onChange={(e) => setCustomerSignupPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your password"
               required
             />
           </div>
@@ -282,6 +292,7 @@ export default function Header() {
               value={customerFirstName}
               onChange={(e) => setCustomerFirstName(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your first name"
               required
             />
           </div>
@@ -292,6 +303,7 @@ export default function Header() {
               value={customerLastName}
               onChange={(e) => setCustomerLastName(e.target.value)}
               className="w-full px-3 py-2 border rounded"
+              placeholder="Enter your last name"
               required
             />
           </div>
