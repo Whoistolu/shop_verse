@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import type { AuthResponse, User, ApiResponse } from '../types/index.ts';
 
-const API_BASE_URL = 'http://localhost:3000/api/v1';
+const API_BASE_URL = 'http://localhost:3001/api/v1';
 
 class ApiService {
   private api: AxiosInstance;
