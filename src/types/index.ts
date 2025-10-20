@@ -26,14 +26,16 @@ export interface Product {
   id: number;
   name: string;
   description: string;
-  price: number;
-  stock_quantity: number;
+  price: string;
+  stock: number;
   brand_id: number;
   category_id: number;
   image_url?: string;
-  is_published: boolean;
+  status: string;
   created_at: string;
   updated_at: string;
+  brand?: Brand;
+  category?: Category;
 }
 
 export interface OrderItem {
